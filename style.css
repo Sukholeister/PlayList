@@ -1,0 +1,142 @@
+*{
+    font-family: 'Roboto', sans-serif;
+}
+body {
+    background: #121212;
+    margin: 0;
+  }
+.gray{
+    color: #8A8A8A; 
+}
+
+.others{
+    color: #8A8A8A;
+
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 24px;
+}
+
+
+ 
+  audio {
+    filter: invert(1);
+    width: 347px;
+    height: 24px;
+    margin-top: 5px;
+    background-color: white;
+  }
+
+ 
+  
+  .my-playlist {
+    color: #FFF;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-left: 64px;
+  }
+  .name-playlist{
+    color:#FFF
+  }
+  .wrapperDeskrAndVolume{
+    
+  }
+  .playlist-img {
+    width: 48px;
+    height: 48px;
+  }
+  .all-time-track{
+    color: #8A8A8A;
+margin-top: 10px;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 24px; /* 171.429% */
+  }
+  .header {
+    height: 48px;
+    flex-shrink: 0;
+    background: rgba(26, 26, 26, 0.80);
+    backdrop-filter: blur(10px);
+  }
+  
+  .track-now {
+    display: flex;
+    justify-content: flex-start;
+    gap: 24px;
+  }
+  
+ 
+  
+  .wrapper-title-element {
+    padding: 36px;
+    width: 570px;
+    
+    flex-shrink: 0;
+    border-radius: 4px;
+    background: #1C1C1C;
+    margin-left: 64px;
+  }
+  
+  .performer-list {
+    color: #FFF;
+  margin-top: 10px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 171.429% */
+  }
+  
+  .name-playlist {
+    color: #FFF;
+
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  
+  .performers  {
+    color: #FFF;
+   display: flex;
+   gap: 5px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
+  }
+  .main-wrapper-playlist{
+    display: flex;
+   margin-top: 100px;
+
+  }
+  .playlist {
+    margin-top: 20px;
+  
+  }
+.wrapperTracks{
+  display: flex;
+  margin-top: 20px;
+}
+  
+.performer  {
+    margin-top: 5px;
+    color:#FFF;
+}
+.track{
+    margin-top: 5px;
+}
+.wrapper-track{
+    margin-left: 10px;
+}
+
+.wrapper-playlist{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 5px;
+}
+  
