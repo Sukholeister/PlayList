@@ -1,24 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
    
-    let title = [
-        {
-            images:'img/img1.png',
-            nameList: 'Hip-Hop Hits',
-            timeAllTracks: 790,
-            performers:'Snoop Dog'
-             
-        },
-        {
-            images:'img/img1.png',
-            nameList: 'Hip-Hop Hits',
-            timeAllTracks: 790,
-            performers:'Snoop Dog'
-             
-        },
-
-    ]
-           
-    let tracks = [
+   let tracks = [
         {
         performer: 'Eminem',
         nameTrack: 'Rap God',
@@ -35,23 +17,37 @@ document.addEventListener('DOMContentLoaded', function() {
         time: 300,
         },
 
-        {
-        performer: 'Snoop Dog',
-        nameTrack: 'still',
-        images: 'img/snoop.webp',
-        fileUrl: 'musik/snoopDogStill.mp3',
-        time: 300,
-        },
-              {
-        performer: 'Snoop Dog',
-        nameTrack: 'still',
-        images: 'img/snoop.webp',
-        fileUrl: 'musik/snoopDogStill.mp3',
-        time: 300,
-        },
-
     ]
     
+let dataList = [
+    {
+        title: {
+            images:'img/img1.png',
+            nameList: 'Hip-Hop Hits',
+            timeAllTracks: 790,
+            performers:'Snoop Dog'
+        },
+
+        tracks: [ 
+            {
+            performer: 'Eminem',
+            nameTrack: 'Rap God',
+            images: 'img/eminem.jpg',
+            fileUrl: 'musik/eminem-RapGod.mp3',
+            time: 300,
+            },
+    
+            {
+            performer: '50 Cent',
+            nameTrack: 'Candy Shop',
+            images: 'img/50cent.jpg',
+            fileUrl: 'musik/50centCandy.mp3',            
+            time: 300,
+            },
+            
+        ]
+    },
+]
        
     let resultTime = 0;
     var trackInMinutes = 0;
@@ -75,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 let mainWrapperPlaylist = document.querySelector('.main-wrapper-playlist')
-
+let performersArray = []
     function renderPlaylistTitle (inputTitle, inputTracks){
         //Cтворення загального блока обгортки на title та Playlist
         let wrapperElement = document.createElement('div');
@@ -115,6 +111,7 @@ let mainWrapperPlaylist = document.querySelector('.main-wrapper-playlist')
         for (let i = 0; i<tracks.length; i++){
             allTimeMusik(tracks[i].fileUrl)
         }
+
         setTimeout(function() {
             let lengthTracks = tracks.length;
             let allTimeTrackElement = document.createElement('div')
@@ -124,8 +121,15 @@ let mainWrapperPlaylist = document.querySelector('.main-wrapper-playlist')
 
         }, 1000);
 
+           
              // Створення виконавців над плейлистом  Створення масиву імен виконавців
-             let performersArray = inputTracks.map(inputTracks => inputTracks.performer);
+             for (let k = 0; k<dataList.length; k++){
+                for(let h = 0; h<dataList[k].tracks; h++){
+                    performersArray.push(inputTracks.performer)
+                    console.log(performersArray);
+                }
+             }
+         
 
              // Обмеження кількості виконавців до максимально трьох
              let limitedPerformers = performersArray.slice(0, 3);
@@ -144,10 +148,6 @@ let mainWrapperPlaylist = document.querySelector('.main-wrapper-playlist')
              performersElement.innerHTML = performersText;
              descrTitleWrapper.append(performersElement)
     }
-
-
-    
-
 
 
 
@@ -183,15 +183,20 @@ let mainWrapperPlaylist = document.querySelector('.main-wrapper-playlist')
 
     }
    
-    for (let i=0; i<title.length; i++){
-        renderPlaylistTitle(title[i], tracks)
-    }
-   
-    for( let i = 0; i<tracks.length; i++){
-        renderTracks(tracks[i]);
+    for (let i=0; i<dataList.length; i++){
+        for(let j = 0; j<dataList[i].tracks.length; j++) {
+         
+            renderPlaylistTitle(dataList[i].title, dataList[i].tracks[j])
+            
+        }
         
     }
-    
-
+   
+    // рендер треків
+    for( let i = 0; i<tracks.length; i++){
+        for(let j = 0; j<dataList[i].tracks.length; j++){
+            renderTracks(dataList[i].tracks[j]);
+        }
+    }
 
 });
