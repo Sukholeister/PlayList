@@ -1,25 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-   
-   let tracks = [
-        {
-        performer: 'Eminem',
-        nameTrack: 'Rap God',
-        images: 'img/eminem.jpg',
-        fileUrl: 'musik/eminem-RapGod.mp3',
-        time: 300,
-        },
-
-        {
-        performer: '50 Cent',
-        nameTrack: 'Candy Shop',
-        images: 'img/50cent.jpg',
-        fileUrl: 'musik/50centCandy.mp3',            
-        time: 300,
-        },
-
-    ]
-    
-let dataList = [
+   let dataList = [
     {
         title: {
             images:'img/img1.png',
@@ -34,7 +14,7 @@ let dataList = [
             nameTrack: 'Rap God',
             images: 'img/eminem.jpg',
             fileUrl: 'musik/eminem-RapGod.mp3',
-            time: 300,
+            
             },
     
             {
@@ -42,12 +22,41 @@ let dataList = [
             nameTrack: 'Candy Shop',
             images: 'img/50cent.jpg',
             fileUrl: 'musik/50centCandy.mp3',            
-            time: 300,
-            },
             
+            },
+            {
+                performer: '50 Cent',
+                nameTrack: 'Candy Shop',
+                images: 'img/50cent.jpg',
+                fileUrl: 'musik/50centCandy.mp3',            
+                
+                },
+                {
+                    performer: '50 Cent',
+                    nameTrack: 'Candy Shop',
+                    images: 'img/50cent.jpg',
+                    fileUrl: 'musik/50centCandy.mp3',            
+                    
+                    },
+      
         ]
     },
+
+    
 ]
+
+
+/// функція підрахунку перший трьох виконавців
+    let performersArray = []
+    function createPerformarce (data) {
+    performersArray.push(data)
+    }
+
+    for( let i = 0; i<dataList.length; i++){
+    for(let j = 0; j < dataList[i].tracks.length; j++){
+        createPerformarce(dataList[i].tracks[j].performer)
+    }
+    }
        
     let resultTime = 0;
     var trackInMinutes = 0;
@@ -71,7 +80,8 @@ let dataList = [
 
 
 let mainWrapperPlaylist = document.querySelector('.main-wrapper-playlist')
-let performersArray = []
+
+
     function renderPlaylistTitle (inputTitle, inputTracks){
         //Cтворення загального блока обгортки на title та Playlist
         let wrapperElement = document.createElement('div');
@@ -105,98 +115,97 @@ let performersArray = []
         trackWrapperElement.classList.add('playlist')
         wrapperElement.append(trackWrapperElement)
         
-   
+     
+        // Обмеження кількості виконавців до максимально трьох
+        let limitedPerformers = performersArray.slice(0, 3);
 
-        /// цикл який підраховує загальну довжину трека 
-        for (let i = 0; i<tracks.length; i++){
-            allTimeMusik(tracks[i].fileUrl)
+        // Додавання "and Others", якщо кількість виконавців більше 3
+        if (performersArray.length > 3) {
+            limitedPerformers.push('<span class="others">and others</span>');
         }
+
+        // Створення текстового рядка із комами між іменами виконавців
+        let performersText = limitedPerformers.join(', ');
+
+        // Створення нового елементу div для імен виконавців
+        let performersElement = document.createElement('div');
+        performersElement.classList.add("performer-list");
+        performersElement.innerHTML = performersText;
+        descrTitleWrapper.append(performersElement)
+        
+        countByNumber(descrTitleWrapper)
+        allTimeMusik(inputTracks.fileUrl)
+
+    }
+
+    function countByNumber (descrTitleWrapper) {
+
+        let result = 0;
+            for( let i = 0; i<dataList.length; i++){
+                result =  dataList[i].tracks.length
+            }
 
         setTimeout(function() {
-            let lengthTracks = tracks.length;
+
             let allTimeTrackElement = document.createElement('div')
-        allTimeTrackElement.classList.add('all-time-track')
-        allTimeTrackElement.append(lengthTracks + ' tracks, ' +' '+ trackInMinutes + 'm ' + trackInSeconds + 's' )
-        descrTitleWrapper.append(allTimeTrackElement)
-
-        }, 1000);
-
-           
-             // Створення виконавців над плейлистом  Створення масиву імен виконавців
-             for (let k = 0; k<dataList.length; k++){
-                for(let h = 0; h<dataList[k].tracks; h++){
-                    performersArray.push(inputTracks.performer)
-                    console.log(performersArray);
-                }
-             }
-         
-
-             // Обмеження кількості виконавців до максимально трьох
-             let limitedPerformers = performersArray.slice(0, 3);
-     
-             // Додавання "and Others", якщо кількість виконавців більше 3
-             if (performersArray.length > 3) {
-                 limitedPerformers.push('<span class="others">and others</span>');
-             }
-     
-             // Створення текстового рядка із комами між іменами виконавців
-             let performersText = limitedPerformers.join(', ');
-     
-             // Створення нового елементу div для імен виконавців
-             let performersElement = document.createElement('div');
-             performersElement.classList.add("performer-list");
-             performersElement.innerHTML = performersText;
-             descrTitleWrapper.append(performersElement)
+            allTimeTrackElement.classList.add('all-time-track')
+            allTimeTrackElement.append(result + ' tracks, ' +' '+ trackInMinutes + 'm ' + trackInSeconds + 's' );
+            descrTitleWrapper.append(allTimeTrackElement)
+        }, 1000); 
     }
 
-
-
-    function renderTracks (track) {
-      let trackWrapperElement  = document.querySelector('.playlist')
-
-        /// Обгортка всіх треків 
-      let wrapperTracks = document.createElement('div');
-        wrapperTracks.classList.add('wrapperTracks')
-        trackWrapperElement.append(wrapperTracks)
-
-        /// cтворення блока для картинки 
-      let playListImg = document.createElement('img');
-          playListImg.src = track.images
-          playListImg.classList.add('playlist-img')
-          wrapperTracks.append(playListImg)
-
-        /// створення обгортки для назви  трека та звукової дорожки 
-      let wrapperDeskrAndVolume = document.createElement('div')
-          wrapperDeskrAndVolume.classList.add('wrapperDeskrAndVolume')
-          wrapperTracks.append(wrapperDeskrAndVolume)
-        /// назва треків 
-      let nameTrack = document.createElement('div')
-          nameTrack.append(track.performer + " " + track.nameTrack)
-          wrapperDeskrAndVolume.append(nameTrack)
-
-        /// створення аудіо дорожки 
-      let audioElement =  document.createElement('audio');
-        audioElement.controls = true;
-        audioElement.src = track.fileUrl;
-        audioElement.classList.add("styled-audio-player");
-        wrapperDeskrAndVolume.append(audioElement)
-
-    }
    
-    for (let i=0; i<dataList.length; i++){
-        for(let j = 0; j<dataList[i].tracks.length; j++) {
-         
-            renderPlaylistTitle(dataList[i].title, dataList[i].tracks[j])
-            
-        }
+  
+
+
+    /// функція якa підраховує загальну довжину трека 
+   
+    function renderTracks (track) {
+        let trackWrapperElement  = document.querySelector('.playlist')
+  
+          /// Обгортка всіх треків 
+        let wrapperTracks = document.createElement('div');
+          wrapperTracks.classList.add('wrapperTracks')
+          trackWrapperElement.append(wrapperTracks)
+  
+          /// cтворення блока для картинки 
+        let playListImg = document.createElement('img');
+            playListImg.src = track.images
+            playListImg.classList.add('playlist-img')
+            wrapperTracks.append(playListImg)
+  
+          /// створення обгортки для назви  трека та звукової дорожки 
+        let wrapperDeskrAndVolume = document.createElement('div')
+            wrapperDeskrAndVolume.classList.add('wrapperDeskrAndVolume')
+            wrapperTracks.append(wrapperDeskrAndVolume)
+          /// назва треків 
+        let nameTrack = document.createElement('div')
+            nameTrack.append(track.performer + " " + track.nameTrack)
+            wrapperDeskrAndVolume.append(nameTrack)
+  
+          /// створення аудіо дорожки 
+        let audioElement =  document.createElement('audio');
+          audioElement.controls = true;
+          audioElement.src = track.fileUrl;
+          audioElement.classList.add("styled-audio-player");
+          wrapperDeskrAndVolume.append(audioElement)
+  
+      }
+  ///RANDER плейлиста
+  for (let i=0; i < dataList.length; i++){
+    for(let j = 0; j<dataList[i].tracks.length; j++) {
+     
+        renderPlaylistTitle(dataList[i].title, dataList[i].tracks[j] )
         
     }
-   
-    // рендер треків
-    for( let i = 0; i<tracks.length; i++){
-        for(let j = 0; j<dataList[i].tracks.length; j++){
-            renderTracks(dataList[i].tracks[j]);
-        }
+    
+}
+
+// рендер треків
+for( let i = 0; i<dataList.length; i++){
+    for(let j = 0; j < dataList[i].tracks.length; j++){
+        renderTracks(dataList[i].tracks[j]);
     }
+}
 
 });
