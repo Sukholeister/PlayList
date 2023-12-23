@@ -74,7 +74,7 @@ line-height: 24px; /* 171.429% */
   .wrapper-title-element {
     padding: 36px;
     width: 570px;
-    
+     
     flex-shrink: 0;
     border-radius: 4px;
     background: #1C1C1C;
@@ -113,7 +113,7 @@ line-height: 24px; /* 171.429% */
    margin-top: 100px;
 
   }
-  .playlist {
+  .playlist_0 {
     margin-top: 20px;
   
   }
