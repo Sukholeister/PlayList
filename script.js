@@ -1,7 +1,11 @@
 import { createPerformarce,performersArray } from "./components/Performance.js";
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
    let dataList = [
     {
+        id: '50-cent',
         title: {
             images:'img/img1.png',
             nameList: 'Hip-Hop Hits',
@@ -43,8 +47,8 @@ document.addEventListener('DOMContentLoaded', function() {
       
         ]
     },
-
     {
+        id: 'snoop-dog',
         title: {
             images:'img/img1.png',
             nameList: 'Jass hits',
@@ -71,38 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
          
       
         ]
-    },
-
-    {
-        title: {
-            images:'img/img1.png',
-            nameList: 'Jass hits',
-            timeAllTracks: 790,
-            performers:'Snoop Dog'
-        },
-
-        tracks: [ 
-            {
-            performer: 'vasik',
-            nameTrack: 'Rap God',
-            images: 'img/eminem.jpg',
-            fileUrl: 'musik/eminem-RapGod.mp3',
-            
-            },
-    
-            {
-            performer: ' vasik',
-            nameTrack: 'Candy Shop',
-            images: 'img/50cent.jpg',
-            fileUrl: 'musik/50centCandy.mp3',            
-            
-            }
-         
-      
-        ]
-    },
-
-
+    }
 ]
 
 for( let i = 0; i<dataList.length; i++){
@@ -114,7 +87,7 @@ for( let i = 0; i<dataList.length; i++){
 let mainWrapperPlaylist = document.querySelector('.main-wrapper-playlist')
 
 
-    function renderPlaylistTitle (inputTitle){
+    function renderPlaylistTitle (inputTitle, index){
         //Cтворення загального блока обгортки на title та Playlist
         let wrapperElement = document.createElement('div');
         
@@ -146,7 +119,7 @@ let mainWrapperPlaylist = document.querySelector('.main-wrapper-playlist')
         
             let trackWrapperElement = document.createElement('div')
        
-            trackWrapperElement.classList.add(`playlist`)
+            trackWrapperElement.classList.add(`playlist-${index}`)
         
        
         wrapperElement.append(trackWrapperElement)
@@ -177,9 +150,11 @@ let mainWrapperPlaylist = document.querySelector('.main-wrapper-playlist')
         
     }
 
-    function renderTracks (track) {
+    function renderTracks (track, index) {
         
-            let trackWrapperElement  = document.querySelector(`.playlist`)
+            let trackWrapperElement  = document.querySelector(`.playlist-${index}`)
+
+            console.log(trackWrapperElement);
   
             /// Обгортка  трекa 
           let wrapperTracks = document.createElement('div');
@@ -254,11 +229,11 @@ let mainWrapperPlaylist = document.querySelector('.main-wrapper-playlist')
 
   ///RANDER плейлиста
   for (let i=0;  i < dataList.length; i++){
-    renderPlaylistTitle(dataList[i].title)
+    renderPlaylistTitle(dataList[i].title, i)
    
     for(let j = 0; j<dataList[i].tracks.length; j++) {
         allTimeMusik(dataList[i].tracks[j].fileUrl);
-        renderTracks(dataList[i].tracks[j] );
+        renderTracks(dataList[i].tracks[j], i );
         
     }
     
