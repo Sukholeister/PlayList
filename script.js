@@ -5,11 +5,11 @@ import { createPerformarce,performersArray } from "./components/Performance.js";
 document.addEventListener('DOMContentLoaded', function() {
    let dataList = [
     {
-        id: '50-cent',
+        
         title: {
             images:'img/img1.png',
             nameList: 'Hip-Hop Hits',
-            timeAllTracks: 790,
+            
             performers:'Snoop Dog'
         },
 
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ]
     },
     {
-        id: 'snoop-dog',
+      
         title: {
             images:'img/img1.png',
             nameList: 'Jass hits',
@@ -107,7 +107,7 @@ let mainWrapperPlaylist = document.querySelector('.main-wrapper-playlist')
 
         ///Створення обгортки блока з Описов
         let descrTitleWrapper = document.createElement('div')
-        descrTitleWrapper.classList.add('deskr-title')  
+        descrTitleWrapper.classList.add(`deskr-title-${index}`)  
         titleElement.append(descrTitleWrapper)
 
         /// Створення назви плейлиста 
@@ -117,15 +117,9 @@ let mainWrapperPlaylist = document.querySelector('.main-wrapper-playlist')
         descrTitleWrapper.append(playListNameElement)
 
         
-            let trackWrapperElement = document.createElement('div')
-       
-            trackWrapperElement.classList.add(`playlist-${index}`)
-        
-       
+        let trackWrapperElement = document.createElement('div')
+        trackWrapperElement.classList.add(`playlist-${index}`)
         wrapperElement.append(trackWrapperElement)
-        
-        // Створення обгортки для плейлистів 
-      
         
      
         // Обмеження кількості виконавців до максимально трьох
@@ -144,17 +138,14 @@ let mainWrapperPlaylist = document.querySelector('.main-wrapper-playlist')
         performersElement.classList.add("performer-list");
         performersElement.innerHTML = performersText;
         descrTitleWrapper.append(performersElement)
-        
-        countByNumber(descrTitleWrapper)
-
-        
     }
+
+
 
     function renderTracks (track, index) {
         
             let trackWrapperElement  = document.querySelector(`.playlist-${index}`)
-
-            console.log(trackWrapperElement);
+           
   
             /// Обгортка  трекa 
           let wrapperTracks = document.createElement('div');
@@ -182,13 +173,10 @@ let mainWrapperPlaylist = document.querySelector('.main-wrapper-playlist')
             audioElement.src = track.fileUrl; 
             audioElement.classList.add("styled-audio-player");
             wrapperDeskrAndVolume.append(audioElement)
+        
 
   
       }
-
-      
-
-
     
         let resultTime = 0;
         var trackInMinutes = 0;
@@ -207,30 +195,38 @@ let mainWrapperPlaylist = document.querySelector('.main-wrapper-playlist')
        
         }
     
-   
-        function countByNumber (descrTitleWrapper) {
-    
-            let result = 0;
-                for( let i = 0; i<dataList.length; i++){
-                    result =  dataList[i].tracks.length
-                }
-    
+ 
+
+        function countByNumber (index) {
+       
             setTimeout(function() {
-    
-                let allTimeTrackElement = document.createElement('div')
-                allTimeTrackElement.classList.add('all-time-track')
-                allTimeTrackElement.append(result + ' tracks, ' +' '+ trackInMinutes + 'm ' + trackInSeconds + 's' );
-                descrTitleWrapper.append(allTimeTrackElement)
+
+            let result = 0;
+            let counterNumber = document.querySelector(`.deskr-title-${index}`)
+       
+                    result = dataList[index].tracks.length      
+                       
+                    let allTimeTrackElement = document.createElement('div')
+
+                    allTimeTrackElement.classList.add('all-time-track')
+                    allTimeTrackElement.append(result + ' tracks, ' +' '+ trackInMinutes + 'm ' + trackInSeconds + 's' );
+                    counterNumber.append(allTimeTrackElement)
+
+
+                    
+               
             }, 1000); 
+        
         }
-    
+
+      
 
 
 
   ///RANDER плейлиста
   for (let i=0;  i < dataList.length; i++){
     renderPlaylistTitle(dataList[i].title, i)
-   
+    countByNumber(i)
     for(let j = 0; j<dataList[i].tracks.length; j++) {
         allTimeMusik(dataList[i].tracks[j].fileUrl);
         renderTracks(dataList[i].tracks[j], i );

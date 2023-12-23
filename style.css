@@ -42,19 +42,22 @@ line-height: 24px;
     color:#FFF
   }
   .wrapperDeskrAndVolume{
+    color:#FFF;
+    margin-left: 10px;
     
   }
   .playlist-img {
     width: 48px;
     height: 48px;
   }
+  
   .all-time-track{
     color: #8A8A8A;
-margin-top: 10px;
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: 24px; /* 171.429% */
+    margin-top: 10px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 171.429% */
   }
   .header {
     height: 48px;
