@@ -1,82 +1,10 @@
 import { createPerformarce,performersArray } from "./components/Performance.js";
-
-
+import countByNumber from './components/countByNumber.js'
+import modalSave from "./components/modalSave.js";
+import renderTracks from "./components/renderTrack.js";
+import { dataList } from "./components/data.js";
 
 document.addEventListener('DOMContentLoaded', function() {
-   let dataList = [
-    {
-        
-        title: {
-            images:'img/img1.png',
-            nameList: 'Hip-Hop Hits',
-            
-            performers:'Snoop Dog'
-        },
-
-        tracks: [ 
-            {
-            performer: 'Eminem',
-            nameTrack: 'Rap God',
-            images: 'img/eminem.jpg',
-            fileUrl: 'musik/eminem-RapGod.mp3',
-            
-            },
-    
-            {
-            performer: '50 Cent',
-            nameTrack: 'Candy Shop',
-            images: 'img/50cent.jpg',
-            fileUrl: 'musik/50centCandy.mp3',            
-            
-            },
-            {
-                performer: '50 Cent',
-                nameTrack: 'Candy Shop',
-                images: 'img/50cent.jpg',
-                fileUrl: 'musik/50centCandy.mp3',            
-                
-                },
-                {
-                    performer: '50 Cent',
-                    nameTrack: 'Candy Shop',
-                    images: 'img/50cent.jpg',
-                    fileUrl: 'musik/50centCandy.mp3',            
-                    
-                    },
-                    
-      
-        ]
-    },
-    {
-      
-        title: {
-            images:'img/img1.png',
-            nameList: 'Jass hits',
-            timeAllTracks: 790,
-            performers:'Snoop Dog'
-        },
-
-        tracks: [ 
-            {
-            performer: 'vasik',
-            nameTrack: 'Rap God',
-            images: 'img/eminem.jpg',
-            fileUrl: 'musik/eminem-RapGod.mp3',
-            
-            },
-    
-            {
-            performer: ' vasik',
-            nameTrack: 'Candy Shop',
-            images: 'img/50cent.jpg',
-            fileUrl: 'musik/50centCandy.mp3',            
-            
-            }
-         
-      
-        ]
-    }
-]
 
 for( let i = 0; i<dataList.length; i++){
     for(let j = 0; j < dataList[i].tracks.length; j++){
@@ -119,6 +47,8 @@ let mainWrapperPlaylist = document.querySelector('.main-wrapper-playlist')
         
         let trackWrapperElement = document.createElement('div')
         trackWrapperElement.classList.add(`playlist-${index}`)
+        trackWrapperElement.classList.add(`overflow`)
+
         wrapperElement.append(trackWrapperElement)
         
      
@@ -142,82 +72,18 @@ let mainWrapperPlaylist = document.querySelector('.main-wrapper-playlist')
 
 
 
-    function renderTracks (track, index) {
-        
-            let trackWrapperElement  = document.querySelector(`.playlist-${index}`)
-           
-  
-            /// Обгортка  трекa 
-          let wrapperTracks = document.createElement('div');
-            wrapperTracks.classList.add('wrapperTracks')
-            trackWrapperElement.append(wrapperTracks) /// переписати
-    
-            /// cтворення блока для картинки 
-          let playListImg = document.createElement('img');
-              playListImg.src = track.images
-              playListImg.classList.add('playlist-img')
-              wrapperTracks.append(playListImg)
-    
-            /// створення обгортки для назви  трека та звукової дорожки 
-          let wrapperDeskrAndVolume = document.createElement('div')
-              wrapperDeskrAndVolume.classList.add('wrapperDeskrAndVolume')
-              wrapperTracks.append(wrapperDeskrAndVolume)
-            /// назва треків 
-          let nameTrack = document.createElement('div')
-              nameTrack.append(track.performer + " " + track.nameTrack)
-              wrapperDeskrAndVolume.append(nameTrack)
-    
-            /// створення аудіо дорожки 
-          let audioElement =  document.createElement('audio');
-            audioElement.controls = true;
-            audioElement.src = track.fileUrl; 
-            audioElement.classList.add("styled-audio-player");
-            wrapperDeskrAndVolume.append(audioElement)
-        
 
-  
-      }
-    
-        let resultTime = 0;
-        var trackInMinutes = 0;
-        var trackInSeconds = 0;
-    
-        function allTimeMusik(track){
-            var audio = new Audio(track);
-                audio.addEventListener('loadeddata', ()=>{
-                    var trackDurationInSeconds = audio.duration;
-                    resultTime += trackDurationInSeconds
-    
-                    trackInMinutes = resultTime / 60;
-                    trackInMinutes = Math.floor(trackInMinutes)
-                    trackInSeconds = Math.floor(trackDurationInSeconds % 60);
-                })
-       
-        }
-    
+
  
-
-        function countByNumber (index) {
-       
-            setTimeout(function() {
-
-            let result = 0;
-            let counterNumber = document.querySelector(`.deskr-title-${index}`)
-       
-                    result = dataList[index].tracks.length      
-                       
-                    let allTimeTrackElement = document.createElement('div')
-
-                    allTimeTrackElement.classList.add('all-time-track')
-                    allTimeTrackElement.append(result + ' tracks, ' +' '+ trackInMinutes + 'm ' + trackInSeconds + 's' );
-                    counterNumber.append(allTimeTrackElement)
-
-
-                    
-               
-            }, 1000); 
+      for (let i=0;  i < dataList.length; i++){
         
-        }
+      
+           let audio =  document.querySelector('audio');
+        
+      }
+
+
+      
 
       
 
@@ -226,13 +92,15 @@ let mainWrapperPlaylist = document.querySelector('.main-wrapper-playlist')
   ///RANDER плейлиста
   for (let i=0;  i < dataList.length; i++){
     renderPlaylistTitle(dataList[i].title, i)
-    countByNumber(i)
+    countByNumber(i, dataList)
     for(let j = 0; j<dataList[i].tracks.length; j++) {
-        allTimeMusik(dataList[i].tracks[j].fileUrl);
+       
         renderTracks(dataList[i].tracks[j], i );
         
     }
     
 }
-
+modalSave();
 });
+
+

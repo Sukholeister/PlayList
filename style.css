@@ -5,10 +5,49 @@ body {
     background: #121212;
     margin: 0;
   }
+.header-wrapper {
+  display: flex;
+  align-items: center;
+  margin-left: 64px;
+  align-items:center;
+  padding-top: 11px;
+}
+.header-wrapper p {
+  margin: 0 0 0 5px;
+  color: #F6BD41;
+font-family: SF UI Display;
+font-size: 18px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
 .gray{
     color: #8A8A8A; 
 }
 
+.span-track{
+  color: #8A8A8A;
+
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+.overflow  {
+  overflow: scroll;
+}
+.playlist-0 {
+  height: 200px;
+  
+}
+
+.wrapperDeskrAndVolume div {
+  color: #FFF;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
 .others{
     color: #8A8A8A;
 
@@ -50,7 +89,7 @@ line-height: 24px;
     width: 48px;
     height: 48px;
   }
-  
+
   .all-time-track{
     color: #8A8A8A;
     margin-top: 10px;
@@ -81,7 +120,7 @@ line-height: 24px;
     flex-shrink: 0;
     border-radius: 4px;
     background: #1C1C1C;
-    margin-left: 64px;
+   
   }
   
   .performer-list {
@@ -113,13 +152,17 @@ line-height: 24px;
   }
   .main-wrapper-playlist{
     display: flex;
+    margin-top: 100px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
    margin-top: 100px;
+   gap: 50px;
+
 
   }
-  .playlist_0 {
-    margin-top: 20px;
+ 
   
-  }
 .wrapperTracks{
   display: flex;
   margin-top: 20px;
@@ -142,4 +185,11 @@ line-height: 24px;
     flex-direction: row-reverse;
     gap: 5px;
 }
-  
+
+
+.modalSave{
+  width: 200px;
+  height: 200px;
+  background-color: red;
+
+}
