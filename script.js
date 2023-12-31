@@ -32,7 +32,6 @@ for( let i = 0; i<dataList.length; i++){
   renderTracks();
   for (let i=0;  i < dataList.length; i++){
     countByNumber(i, dataList)
-   
     
 }
 modalSave();

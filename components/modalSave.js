@@ -1,9 +1,65 @@
-import { dataList } from "./data.js";
+
+
+
+
 import renderTracks from "./renderTrack.js";
 
 let modalWindow = document.createElement('div');
 
-export default function modalSave(text) {
+function uploadTrack() {
+    let dataListFromLocalStorage = localStorage.getItem('DataKey');
+    let dataList = JSON.parse(dataListFromLocalStorage);
+    
+    let select = document.querySelector('.selectPlaylists');
+    let selectedIndex = select.selectedIndex;
+    let selectedOption = select.options[selectedIndex].textContent;
+
+    // Оголошення флагу для відстеження того, чи вже оновлено плейлист
+    let playlistUpdated = false;
+
+    for (let i = 0; i < dataList.length; i++) {
+        if (dataList[i].title.nameList === selectedOption) {
+            let fileInput = document.querySelector('input[type="file"]');
+            let file = fileInput.files[0];
+
+            if (file) {
+                let obj = {
+                    nameTrack: file.name,
+                    images: 'img/default.png',
+                    fileUrl: URL.createObjectURL(file),
+                };
+
+                dataList[i].tracks.push(obj);
+
+                // Оновлення данних в local storage після додавання нового треку
+                localStorage.setItem('DataKey', JSON.stringify(dataList));
+
+                // Викликати clearPlaylist та renderTracks тільки якщо плейлист ще не був оновлений
+                
+                    clearPlaylist();
+                    renderTracks();
+                
+            }
+        }
+    }
+}
+
+function clearPlaylist() {
+    let dataListFromLocalStorage = localStorage.getItem('DataKey');
+let dataList = JSON.parse(dataListFromLocalStorage);
+
+    for (let i = 0; i < dataList.length; i++) {
+        let trackWrapperElement = document.querySelector(`.playlist-${i}`);
+        if (trackWrapperElement) {
+            trackWrapperElement.innerHTML = ''; // Видаліть вміст контейнера, якщо він існує
+        }
+    }
+}
+
+export default function modalSave() {
+    let dataListFromLocalStorage = localStorage.getItem('DataKey');
+    let dataList = JSON.parse(dataListFromLocalStorage);
+
     modalWindow.classList.add('modalSave');
     document.body.append(modalWindow);
 
@@ -32,43 +88,9 @@ export default function modalSave(text) {
     input.onchange = onchange;
     modalWindow.append(input);
 
-    function clearPlaylist() {
-        for (let i = 0; i < dataList.length; i++) {
-            let trackWrapperElement = document.querySelector(`.playlist-${i}`);
+ 
+
+  
     
-            // Перевірте, чи елемент існує перед видаленням
-         
-                trackWrapperElement.innerHTML = ''; // Видаліть вміст контейнера
-            
-        }
-    }
-
-    function uploadTrack() {
-        let select = document.querySelector('.selectPlaylists');
-        let selectedIndex = select.selectedIndex;
-        let selectedOption = select.options[selectedIndex].textContent;
-
-        for (let i = 0; i < dataList.length; i++) {
-            if (dataList[i].title.nameList === selectedOption) {
-                let fileInput = document.querySelector('input[type="file"]');
-                let file = fileInput.files[0];
-
-                if (file) {
-                    let obj = {
-                        nameTrack: file.name,
-                        images: 'img/default.png', 
-                        fileUrl: URL.createObjectURL(file),
-                    };
-
-                    dataList[i].tracks.push(obj);
-                    clearPlaylist()
-                    renderTracks();
-                }
-            }
-        }
-    }
-
-   
-
     windowSelect();
 }

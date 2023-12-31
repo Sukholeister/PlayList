@@ -1,4 +1,6 @@
-import { dataList } from "./data.js";
+
+let dataListFromLocalStorage = localStorage.getItem('DataKey');
+let dataList = JSON.parse(dataListFromLocalStorage);
 
 
 

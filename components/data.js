@@ -1,3 +1,4 @@
+
 export let dataList = [
     {
         
@@ -44,7 +45,7 @@ export let dataList = [
     {
         title: {
             images:'img/img1.png',
-            nameList: 'Jass hits',
+            nameList: 'elctro hits',
             timeAllTracks: 790,
             performers:'Snoop Dog'
         },
@@ -126,3 +127,6 @@ export let dataList = [
         ]
     }
 ];
+
+let dataListLocal = JSON.stringify(dataList);
+localStorage.setItem('DataKey', dataListLocal);
