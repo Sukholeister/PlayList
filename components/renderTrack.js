@@ -1,10 +1,11 @@
 
-let dataListFromLocalStorage = localStorage.getItem('DataKey');
-let dataList = JSON.parse(dataListFromLocalStorage);
 
 
 
  export default function renderTracks () {
+
+  const dataListFromLocalStorage = localStorage.getItem('DataKey');
+  const dataList = JSON.parse(dataListFromLocalStorage);
 
   for (let i=0;  i < dataList.length; i++){
     for(let j = 0; j<dataList[i].tracks.length; j++) {

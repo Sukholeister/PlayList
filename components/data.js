@@ -129,4 +129,6 @@ export let dataList = [
 ];
 
 let dataListLocal = JSON.stringify(dataList);
-localStorage.setItem('DataKey', dataListLocal);
+if(!dataListLocal){
+    localStorage.setItem('DataKey', dataListLocal);
+}

@@ -31,6 +31,8 @@ function uploadTrack() {
 
                 dataList[i].tracks.push(obj);
 
+
+                console.log(dataList);
                 // Оновлення данних в local storage після додавання нового треку
                 localStorage.setItem('DataKey', JSON.stringify(dataList));
 
@@ -56,10 +58,11 @@ let dataList = JSON.parse(dataListFromLocalStorage);
     }
 }
 
-function windowSelect() {
-    let dataListFromLocalStorage = localStorage.getItem('DataKey');
-let dataList = JSON.parse(dataListFromLocalStorage);
+function windowSelect(select) {
+    const dataListFromLocalStorage = localStorage.getItem('DataKey');
+    const dataList = JSON.parse(dataListFromLocalStorage);
 
+    console.log(dataList);
     for (let i = 0; i < dataList.length; i++) {
         let option = document.createElement('option');
         option.append(dataList[i].title.nameList);
@@ -70,6 +73,8 @@ let dataList = JSON.parse(dataListFromLocalStorage);
 export default function modalSave() {
     let dataListFromLocalStorage = localStorage.getItem('DataKey');
     let dataList = JSON.parse(dataListFromLocalStorage);
+
+    console.log(dataList)
 
     modalWindow.classList.add('modalSave');
     document.body.append(modalWindow);
@@ -94,5 +99,5 @@ export default function modalSave() {
     modalWindow.append(input);
 
     
-    windowSelect();
+    windowSelect(select);
 }
