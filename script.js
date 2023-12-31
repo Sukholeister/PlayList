@@ -22,6 +22,7 @@ for( let i = 0; i<dataList.length; i++){
 
 
       
+    
   renderPlaylistTitle()
   renderTracks();
   for (let i=0;  i < dataList.length; i++){
