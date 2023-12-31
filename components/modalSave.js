@@ -56,6 +56,17 @@ let dataList = JSON.parse(dataListFromLocalStorage);
     }
 }
 
+function windowSelect() {
+    let dataListFromLocalStorage = localStorage.getItem('DataKey');
+let dataList = JSON.parse(dataListFromLocalStorage);
+
+    for (let i = 0; i < dataList.length; i++) {
+        let option = document.createElement('option');
+        option.append(dataList[i].title.nameList);
+        select.append(option);
+    }
+}
+
 export default function modalSave() {
     let dataListFromLocalStorage = localStorage.getItem('DataKey');
     let dataList = JSON.parse(dataListFromLocalStorage);
@@ -74,13 +85,7 @@ export default function modalSave() {
     select.classList.add('selectPlaylists');
     modalWindow.append(select);
 
-    function windowSelect() {
-        for (let i = 0; i < dataList.length; i++) {
-            let option = document.createElement('option');
-            option.append(dataList[i].title.nameList);
-            select.append(option);
-        }
-    }
+  
 
     let input = document.createElement('input');
     input.type = 'file';
@@ -88,9 +93,6 @@ export default function modalSave() {
     input.onchange = onchange;
     modalWindow.append(input);
 
- 
-
-  
     
     windowSelect();
 }
