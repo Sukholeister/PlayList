@@ -1,8 +1,7 @@
 
-
-
-
+import buttonOpen  from "./addTrack.js";
 import renderTracks from "./renderTrack.js";
+import countByNumber from "./countByNumber.js";
 
 let modalWindow = document.createElement('div');
 
@@ -40,10 +39,40 @@ function uploadTrack() {
                 
                     clearPlaylist();
                     renderTracks();
+                    countByNumber();
                 
             }
         }
     }
+    
+}
+   
+
+function closeModalWindow () {
+
+    let opasity = document.createElement('div');
+    opasity.classList.add('opasity');
+    document.body.append(opasity)
+
+
+    let modalSave = document.querySelector('.modalSave')
+    let closeButton = document.createElement('img');
+    closeButton.src = 'img/remove.png'
+    
+    closeButton.classList.add('close-button');
+    modalSave.append(closeButton)
+
+    opasity.addEventListener('click', ()=>{
+        opasity.classList.remove('active')
+        modalSave.classList.remove('active')
+    })
+
+    closeButton.addEventListener('click', ()=>{
+        modalSave.classList.remove('active')
+        opasity.classList.remove('active')
+       
+    })
+
 }
 
 function clearPlaylist() {
@@ -65,30 +94,41 @@ function windowSelect(select) {
     console.log(dataList);
     for (let i = 0; i < dataList.length; i++) {
         let option = document.createElement('option');
+        
         option.append(dataList[i].title.nameList);
         select.append(option);
     }
 }
 
 export default function modalSave() {
+    
     let dataListFromLocalStorage = localStorage.getItem('DataKey');
     let dataList = JSON.parse(dataListFromLocalStorage);
+  
 
-    console.log(dataList)
 
     modalWindow.classList.add('modalSave');
     document.body.append(modalWindow);
 
     let button = document.createElement('button');
     button.textContent = 'Завантажити';
-    button.addEventListener('click', () => {
-        uploadTrack();
-    });
-    modalWindow.append(button);
+        button.addEventListener('click', () => {
+
+            const opasity = document.querySelector('.opasity')
+            const modalSave = document.querySelector('.modalSave')
+            
+            modalSave.classList.remove('active');
+            opasity.classList.remove('active');
+
+            uploadTrack();
+            
+            
+        });
+    
 
     let select = document.createElement('select');
     select.classList.add('selectPlaylists');
-    modalWindow.append(select);
+    
 
   
 
@@ -96,8 +136,11 @@ export default function modalSave() {
     input.type = 'file';
     input.accept = 'audio/*';
     input.onchange = onchange;
+    closeModalWindow();
     modalWindow.append(input);
-
-    
+    modalWindow.append(select);
+    modalWindow.append(button);
+    buttonOpen();
     windowSelect(select);
+
 }

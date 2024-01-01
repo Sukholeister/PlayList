@@ -13,23 +13,12 @@ for( let i = 0; i<dataList.length; i++){
     }
 }
 
-      for (let i=0;  i < dataList.length; i++){
-        
-      
-           let audio =  document.querySelector('audio');
-        
-      };
-
-
-      
-    
+modalSave();
   renderPlaylistTitle()
   renderTracks();
-  for (let i=0;  i < dataList.length; i++){
-    countByNumber(i, dataList)
-    
-}
-modalSave();
+    countByNumber()
+  
+  
 });
 
 
