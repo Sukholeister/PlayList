@@ -8,7 +8,6 @@ let mainWrapperPlaylist = document.querySelector('.main-wrapper-playlist')
    export default function renderPlaylistTitle (){
         for (let i=0;  i < dataList.length; i++){
         
-  
         //Cтворення загального блока обгортки на title та Playlist
         let wrapperElement = document.createElement('div');
         

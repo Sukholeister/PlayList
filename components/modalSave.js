@@ -5,16 +5,13 @@ import countByNumber from "./countByNumber.js";
 
 let modalWindow = document.createElement('div');
 
-function uploadTrack() {
-    let dataListFromLocalStorage = localStorage.getItem('DataKey');
-    let dataList = JSON.parse(dataListFromLocalStorage);
+function uploadTrack(dataList) {
     
     let select = document.querySelector('.selectPlaylists');
     let selectedIndex = select.selectedIndex;
     let selectedOption = select.options[selectedIndex].textContent;
 
     // Оголошення флагу для відстеження того, чи вже оновлено плейлист
-    let playlistUpdated = false;
 
     for (let i = 0; i < dataList.length; i++) {
         if (dataList[i].title.nameList === selectedOption) {
@@ -39,7 +36,7 @@ function uploadTrack() {
                 
                     clearPlaylist();
                     renderTracks();
-                    countByNumber();
+                    
                 
             }
         }
@@ -47,6 +44,7 @@ function uploadTrack() {
     
 }
    
+
 
 function closeModalWindow () {
 
@@ -63,11 +61,13 @@ function closeModalWindow () {
     modalSave.append(closeButton)
 
     opasity.addEventListener('click', ()=>{
+
         opasity.classList.remove('active')
         modalSave.classList.remove('active')
     })
 
     closeButton.addEventListener('click', ()=>{
+
         modalSave.classList.remove('active')
         opasity.classList.remove('active')
        
@@ -75,19 +75,28 @@ function closeModalWindow () {
 
 }
 
+
+
+
 function clearPlaylist() {
     let dataListFromLocalStorage = localStorage.getItem('DataKey');
 let dataList = JSON.parse(dataListFromLocalStorage);
 
     for (let i = 0; i < dataList.length; i++) {
+
         let trackWrapperElement = document.querySelector(`.playlist-${i}`);
+
         if (trackWrapperElement) {
             trackWrapperElement.innerHTML = ''; // Видаліть вміст контейнера, якщо він існує
         }
     }
 }
 
+
+
+
 function windowSelect(select) {
+
     const dataListFromLocalStorage = localStorage.getItem('DataKey');
     const dataList = JSON.parse(dataListFromLocalStorage);
 
@@ -100,19 +109,22 @@ function windowSelect(select) {
     }
 }
 
-export default function modalSave() {
+
+
+
+export default function modalSave(dataList) {
     
-    let dataListFromLocalStorage = localStorage.getItem('DataKey');
-    let dataList = JSON.parse(dataListFromLocalStorage);
-  
-
-
     modalWindow.classList.add('modalSave');
     document.body.append(modalWindow);
 
     let button = document.createElement('button');
     button.textContent = 'Завантажити';
         button.addEventListener('click', () => {
+            
+            const elementsToRemove = document.querySelectorAll('.all-time-track');
+            elementsToRemove.forEach(element => {
+                element.remove();
+            });
 
             const opasity = document.querySelector('.opasity')
             const modalSave = document.querySelector('.modalSave')
@@ -120,22 +132,19 @@ export default function modalSave() {
             modalSave.classList.remove('active');
             opasity.classList.remove('active');
 
-            uploadTrack();
-            
-            
+            uploadTrack(dataList);
+            countByNumber(dataList)
         });
     
 
     let select = document.createElement('select');
     select.classList.add('selectPlaylists');
     
-
-  
-
     let input = document.createElement('input');
     input.type = 'file';
     input.accept = 'audio/*';
     input.onchange = onchange;
+
     closeModalWindow();
     modalWindow.append(input);
     modalWindow.append(select);
