@@ -5,9 +5,9 @@ import modalSave from "./components/modalSave.js";
 import renderPlaylistTitle from "./components/renderPlayList.js";
 import { dataList } from "./components/data.js";
 import renderTracks from "./components/renderTrack.js";
+import deleteTrack from "./components/deleteTrack.js";
 
-let dataListFromLocalStorage = localStorage.getItem('DataKey');
-let dataListLocal = JSON.parse(dataListFromLocalStorage);
+const dataListLocal = JSON.parse(localStorage.getItem('DataKey')); 
   
 document.addEventListener('DOMContentLoaded', function() {
   
@@ -17,12 +17,15 @@ for( let i = 0; i<dataList.length; i++){
     }
 }
 
-  modalSave(dataListLocal);
+ 
   renderPlaylistTitle(dataListLocal)
-  renderTracks(dataListLocal);
+  renderTracks(dataListLocal); // не прокидається через props 
   countByNumber(dataListLocal)
-  
-  
+  deleteTrack(dataListLocal);
+  modalSave(dataListLocal);
+
+
+
 });
 
 

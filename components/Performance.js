@@ -4,5 +4,3 @@
          performersArray.push(data)
          }
          
-      
-    

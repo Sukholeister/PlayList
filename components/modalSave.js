@@ -16,10 +16,11 @@ function uploadTrack(dataList) {
     for (let i = 0; i < dataList.length; i++) {
         if (dataList[i].title.nameList === selectedOption) {
             let fileInput = document.querySelector('input[type="file"]');
-            let file = fileInput.files[0];
+            let file = fileInput.files[0]; // indexedDB
 
             if (file) {
                 let obj = {
+                    id:  crypto.randomUUID(),
                     nameTrack: file.name,
                     images: 'img/default.png',
                     fileUrl: URL.createObjectURL(file),
@@ -44,7 +45,6 @@ function uploadTrack(dataList) {
     
 }
    
-
 
 function closeModalWindow () {
 
@@ -76,8 +76,6 @@ function closeModalWindow () {
 }
 
 
-
-
 function clearPlaylist() {
     let dataListFromLocalStorage = localStorage.getItem('DataKey');
 let dataList = JSON.parse(dataListFromLocalStorage);
@@ -93,14 +91,11 @@ let dataList = JSON.parse(dataListFromLocalStorage);
 }
 
 
-
-
 function windowSelect(select) {
 
     const dataListFromLocalStorage = localStorage.getItem('DataKey');
     const dataList = JSON.parse(dataListFromLocalStorage);
 
-    console.log(dataList);
     for (let i = 0; i < dataList.length; i++) {
         let option = document.createElement('option');
         
@@ -108,8 +103,6 @@ function windowSelect(select) {
         select.append(option);
     }
 }
-
-
 
 
 export default function modalSave(dataList) {
